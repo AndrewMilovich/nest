@@ -29,7 +29,7 @@ export class PostsController {
   deletePostById(@Param('id') id: string): void {
     this.postService.deletePost(id);
   }
-  @Put()
+  @Put(':id')
   updatePost(
     @Param('id') id: string,
     @Body() newPost: Partial<CreatePostDto>,
