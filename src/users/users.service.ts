@@ -25,7 +25,7 @@ export class UsersService {
   }
 
   updateUserById(id: string, user: Partial<CreateUserDto>): CreateUserDto {
-    const updateUser = this.users.find((value) => (value.id = id));
+    const updateUser = this.users.find((value) => (value.id == id));
     return Object.assign(updateUser, user);
   }
 }

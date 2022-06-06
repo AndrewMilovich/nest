@@ -22,7 +22,7 @@ export class PostsService {
     this.posts.splice(index, 1);
   }
   updateById(id: string, post: Partial<CreatePostDto>): CreatePostDto {
-    const updatePost = this.posts.find((value) => value.id === id);
+    const updatePost = this.posts.find((value) => value.id == id);
     return Object.assign(updatePost, post);
   }
 }
