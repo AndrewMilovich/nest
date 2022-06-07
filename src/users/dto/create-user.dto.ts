@@ -9,12 +9,3 @@ export class CreateUserDto {
   readonly password: string;
   public posts: CreatePostDto[];
 }
-// id       Int       @id @default(autoincrement())
-// email    String    @unique
-// name     String
-// age      Int
-// city     String?
-//   password String
-// status   Boolean
-// posts    Post[]
-// comments Comment[]

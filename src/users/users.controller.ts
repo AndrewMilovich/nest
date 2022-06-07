@@ -9,26 +9,27 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
+import { User } from '@prisma/client';
+import { UpdateUser } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
   @HttpCode(HttpStatus.OK)
   @Get()
-  getUsers(): CreateUserDto[] {
+  getUsers() {
     return this.userService.getAll();
   }
 
   @Get('/:id')
-  getOneUser(@Param('id') id: string): CreateUserDto {
+  getOneUser(@Param('id') id: string) {
     return this.userService.getUsersById(id);
   }
 
   @HttpCode(HttpStatus.OK)
   @Post()
-  createUser(@Body() userDto: CreateUserDto): CreateUserDto {
+  createUser(@Body() userDto: User) {
     return this.userService.createUser(userDto);
   }
 
@@ -40,10 +41,7 @@ export class UsersController {
 
   @HttpCode(HttpStatus.OK)
   @Put('/:id')
-  updateUser(
-    @Param('id') id: string,
-    @Body() userDto: Partial<CreateUserDto>,
-  ): CreateUserDto {
+  updateUser(@Param('id') id: string, @Body() userDto: UpdateUser) {
     return this.userService.updateUserById(id, userDto);
   }
 }

@@ -4,7 +4,6 @@ import { Prisma, User } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
-  // private users = [];
   constructor(private prismaService: PrismaService) {}
 
   getAll(): Promise<User[]> {
@@ -19,15 +18,14 @@ export class UsersService {
     return this.prismaService.user.create({ data });
   }
 
-  // deleteUserById(id: string): void {
-  //   const index = this.users.findIndex((value) => value.id === id);
-  //   this.users.splice(index, 1);
-  // }
-  //
-  updateUser(id: string, userData: Prisma.UserUpdateInput): Promise<User> {
+  deleteUserById(id: string): void {
+    this.prismaService.user.delete({ where: { id: Number(id) } });
+  }
+
+  updateUserById(id: string, userData: Prisma.UserUpdateInput): Promise<User> {
     return this.prismaService.user.update({
       where: { id: Number(id) },
-      data: { name: userData.name, city: userData.city },
+      data: userData,
     });
   }
 }

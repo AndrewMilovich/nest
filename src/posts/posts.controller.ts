@@ -14,26 +14,23 @@ import { CreatePostDto } from './dto/create-post.dto';
 export class PostsController {
   constructor(private postService: PostsService) {}
   @Get()
-  getAllPosts(): CreatePostDto[] {
+  getAllPosts() {
     return this.postService.getAllPosts();
   }
   @Get(':id')
-  getOnePost(@Param('id') id: string): CreatePostDto {
+  getOnePost(@Param('id') id: string) {
     return this.postService.getPostById(id);
   }
   @Post()
-  createPost(@Body() post: CreatePostDto): CreatePostDto {
+  createPost(@Body() post: CreatePostDto) {
     return this.postService.createPost(post);
   }
   @Delete(':id')
-  deletePostById(@Param('id') id: string): void {
+  deletePostById(@Param('id') id: string) {
     this.postService.deletePost(id);
   }
   @Put(':id')
-  updatePost(
-    @Param('id') id: string,
-    @Body() newPost: Partial<CreatePostDto>,
-  ): CreatePostDto {
+  updatePost(@Param('id') id: string, @Body() newPost: Partial<CreatePostDto>) {
     return this.postService.updateById(id, newPost);
   }
 }
