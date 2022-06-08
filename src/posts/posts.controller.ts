@@ -10,9 +10,16 @@ import {
   Put,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { CreatePostDto } from './dto/create-post.dto';
+import {  Prisma } from "@prisma/client";
 import { UpdatePostDto } from './dto/update-post.dto';
-import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from "@nestjs/swagger";
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('Posts')
 @Controller('posts')
@@ -92,7 +99,7 @@ export class PostsController {
   })
   @HttpCode(HttpStatus.CREATED)
   @Post()
-  createPost(@Body() post: CreatePostDto) {
+  createPost(@Body() post: Prisma.PostCreateInput) {
     return this.postService.createPost(post);
   }
   @ApiOperation({ summary: 'Delete One Post' })
@@ -109,6 +116,15 @@ export class PostsController {
   deletePostById(@Param('id') id: string) {
     this.postService.deletePost(id);
   }
+  @ApiBody({
+    schema: {
+      example: {
+        content: 'update example content 1',
+        published: true,
+        authorId: 1,
+      },
+    },
+  })
   @ApiOperation({ summary: 'Update Post by id' })
   @ApiBody({
     schema: {
@@ -121,6 +137,7 @@ export class PostsController {
     status: 200,
     schema: {
       example: {
+        id: 1,
         content: 'update example content 1',
         published: true,
         authorId: 1,

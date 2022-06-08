@@ -7,10 +7,13 @@ export class PostsService {
   constructor(private prismaService: PrismaService) {}
 
   getAllPosts(): Promise<Post[]> {
-    return this.prismaService.post.findMany();
+    return this.prismaService.post.findMany({ include: { comments: true } });
   }
   getPostById(id: string): Promise<Post> {
-    return this.prismaService.post.findUnique({ where: { id: Number(id) } });
+    return this.prismaService.post.findUnique({
+      where: { id: Number(id) },
+      include: { comments: true },
+    });
   }
 
   createPost(data: Prisma.PostCreateInput): Promise<Post> {
