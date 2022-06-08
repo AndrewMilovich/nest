@@ -7,11 +7,14 @@ export class UsersService {
   constructor(private prismaService: PrismaService) {}
 
   getAll(): Promise<User[]> {
-    return this.prismaService.user.findMany();
+    return this.prismaService.user.findMany({ include: { posts: true } });
   }
 
   getUsersById(id: string): Promise<User> {
-    return this.prismaService.user.findUnique({ where: { id: Number(id) } });
+    return this.prismaService.user.findUnique({
+      where: { id: Number(id) },
+      include: { posts: true },
+    });
   }
 
   createUser(data: Prisma.UserCreateInput): Promise<User> {
