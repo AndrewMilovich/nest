@@ -16,7 +16,7 @@ model User {
   age      Int
   city     String?
   password String
-  status   Boolean
+  status   Boolean  @default(false)
   posts    Post[]
   comments Comment[]
 }

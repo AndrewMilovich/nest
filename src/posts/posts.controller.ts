@@ -10,7 +10,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import {  Prisma } from "@prisma/client";
+import { Prisma } from '@prisma/client';
 import { UpdatePostDto } from './dto/update-post.dto';
 import {
   ApiBody,

@@ -22,5 +22,4 @@ export class CreateUserDto {
   public status: boolean;
   @IsString()
   readonly password: string;
-  public posts: CreatePostDto[];
 }

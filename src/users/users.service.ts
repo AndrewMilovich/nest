@@ -17,6 +17,10 @@ export class UsersService {
     });
   }
 
+  getUserByEmail(userEmail: string): Promise<User> {
+    return this.prismaService.user.findFirst({ where: { email: userEmail } });
+  }
+
   createUser(data: Prisma.UserCreateInput): Promise<User> {
     return this.prismaService.user.create({ data });
   }
