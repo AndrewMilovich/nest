@@ -1,5 +1,5 @@
 import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
-import { CreateCommentDto } from "../../comments/dto/create-comment.dto";
+import { CreateCommentDto } from '../../comments/dto/create-comment.dto';
 
 export class CreatePostDto {
   @IsString()

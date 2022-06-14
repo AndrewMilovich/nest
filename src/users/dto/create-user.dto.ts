@@ -1,4 +1,3 @@
-import { CreatePostDto } from '../../posts/dto/create-post.dto';
 import {
   IsBoolean,
   IsEmail,
