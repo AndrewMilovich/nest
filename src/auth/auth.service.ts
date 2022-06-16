@@ -7,7 +7,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
-import {  User } from '@prisma/client';
+import { User } from '@prisma/client';
 import { LoginDto } from './dto/login.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 @Injectable()
@@ -59,7 +59,7 @@ export class AuthService {
     try {
       const token = this.getTokenFromJwt(jwt);
       const user = await this.jwtService.verify(token, {
-        publicKey: 'Secret',
+        publicKey: 'Access',
       });
 
       return user.id;
