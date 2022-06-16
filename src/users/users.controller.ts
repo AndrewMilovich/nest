@@ -7,8 +7,9 @@ import {
   HttpStatus,
   Param,
   Post,
-  Put,
-} from '@nestjs/common';
+  Put, UploadedFile,
+  UseInterceptors
+} from "@nestjs/common";
 import { UsersService } from './users.service';
 import { User } from '@prisma/client';
 import { UpdateUser } from './dto/update-user.dto';
@@ -20,11 +21,17 @@ import {
   ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { S3managerService } from '../s3manager/s3manager.service';
+import { diskStorage } from 'multer';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
-  constructor(private userService: UsersService) {}
+  constructor(
+    private userService: UsersService,
+    private s3Service: S3managerService,
+  ) {}
   @ApiOperation({ summary: 'Get all user' })
   @ApiOkResponse({
     status: 200,
@@ -158,7 +165,12 @@ export class UsersController {
   })
   @HttpCode(HttpStatus.OK)
   @Put('/:id')
-  updateUser(@Param('id') id: string, @Body() userDto: UpdateUser) {
-    return this.userService.updateUserById(id, userDto);
+  @UseInterceptors(FileInterceptor('avatar'))
+  async updateUser(
+    @Param('id') id: string,
+    @Body() userDto: UpdateUser,
+    @UploadedFile() file,
+  ) {
+    return this.userService.updateUserById(id, userDto, file);
   }
 }

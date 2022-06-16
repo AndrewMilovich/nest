@@ -9,6 +9,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model User {
   id       Int       @id @default(autoincrement())
   email    String    @unique
@@ -16,7 +17,8 @@ model User {
   age      Int
   city     String?
   password String
-  status   Boolean  @default(false)
+  avatar   String?
+  status   Boolean   @default(false)
   posts    Post[]
   comments Comment[]
 }
@@ -40,3 +42,8 @@ model Comment {
   Post      Post?    @relation(fields: [postId], references: [id])
   postId    Int?
 }
+
+// prisma format  // check
+// npx prisma generate // синхронізація схеми з базою
+// npx prisma migrate dev --name change_post_table --create-only  // add new column to db
+// npx prisma migrate dev --name init

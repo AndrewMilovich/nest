@@ -1,11 +1,12 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+// import { IsNotEmpty, IsString } from 'class-validator';
 
 export class UpdateUser {
-  @IsString()
-  @IsNotEmpty()
+  // @IsString()
+  // @IsNotEmpty()
   public name: string;
-  @IsString()
+  // @IsString()
   public age: number;
-  @IsString()
+  // @IsString()
   public city: string;
+  public avatar: string;
 }
