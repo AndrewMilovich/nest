@@ -59,12 +59,15 @@ export class AuthService {
     try {
       const token = this.getTokenFromJwt(jwt);
       const user = await this.jwtService.verify(token, {
-        publicKey: 'Access',
+        secret: 'Access',
       });
 
       return user.id;
     } catch (e) {
-      console.log(e);
+      throw new UnauthorizedException(
+        HttpStatus.UNAUTHORIZED,
+        `UNAUTHORIZED user, ${e.message[0]}`,
+      );
     }
   }
 

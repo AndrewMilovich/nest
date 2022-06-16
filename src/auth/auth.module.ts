@@ -5,8 +5,8 @@ import { UsersModule } from '../users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { PrismaService } from '../core/prisma.service';
-import { S3managerModule } from "../s3manager/s3manager.module";
-import { S3managerService } from "../s3manager/s3manager.service";
+import { S3managerModule } from '../s3manager/s3manager.module';
+import { S3managerService } from '../s3manager/s3manager.service';
 
 @Module({
   controllers: [AuthController],
